@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' "/>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href='https://fonts.googleapis.com/css?family=JetBrains Mono' rel='stylesheet'/>
+    <title>SimpleCRUD</title>
+    <link rel="stylesheet" href="css/style.css"/>
+    <script defer src="js/main.js"></script>
+</head>
+<body>
+<div class="mainApp">
+    <div class="contentArea">
+        <div id="contentPages" class="contentPages" style="padding-top: 70px;">
+            <hr>
+            <h3>Employees</h3>
+            <br>
+
+            <div id="form-container">
+                <form id="createEmployeeForm">
+                    <label for="nameInput">Name</label>
+                    <input class="custom-input" id="nameInput" type="text" placeholder="John" name="name">
+                    <br>
+                    <label for="occupationInput">Occupation</label>
+                    <input class="custom-input" id="occupationInput" type="text" placeholder="Programmer" name="occupationInput">
+                    <br>
+                    <label for="salaryInput">Salary</label>
+                    <input class="custom-input" id="salaryInput" type="text" placeholder="65000" name="salaryInput">
+                    <br>
+                </form>
+            </div>
+            <div id="submitEmployeeButton">
+                <button class="buttons">Submit</button>
+            </div>
+
+            <div id="createEmployeeButton">
+                <button  class="buttons">Create new employee</button>
+            </div>
+            <br>
+            <hr>
+        </div>
+    </div>
+</div>
+</body>
+</html>

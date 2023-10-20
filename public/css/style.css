@@ -1,0 +1,205 @@
+:root {
+    /* ===== Colors ===== */
+    --body-color: #2C313C;
+    --text-color: #c5c4c4;
+    --background-color: #272C36;
+    --task-bar-background-color-normal: #1B1D23;
+    --nav-bar-button-color: #c5c4c4;
+}
+
+html {
+    background-color: white;
+}
+
+body {
+    margin:0;
+    padding: 0;
+    font-family: 'JetBrains Mono';
+    font-size: 1.5rem;
+    height: 100%;
+}
+
+.mainApp {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    width: 600px;
+    height: 700px;
+    margin: auto;
+    overflow: hidden;
+    color: var(--text-color);
+    background-color: var(--body-color);
+    -webkit-box-sizing: border-box;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+
+.mainApp > .contentArea {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
+
+.mainApp > .contentArea > .leftMenu {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: var(--background-color);
+    display: none;
+}
+
+.mainApp > .contentArea > .contentPages {
+    width: 100%;
+    height: 100%;
+    -webkit-box-align: center;
+    -webkit-box-pack: center;
+}
+
+#spot1, #spot2, #spot3 {
+    text-align: center;
+}
+
+.buttons {
+    background-color: #f8cc1d;
+    border-radius: 8px;
+    border-style: none;
+    box-sizing: border-box;
+    color: #030303;
+    cursor: pointer;
+    display: inline-block;
+    font-family: Inter,-apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: normal;
+    line-height: 1.0;
+    outline: none;
+    overflow: hidden;
+    padding: 10px 15px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: top;
+    white-space: nowrap;
+}
+
+.buttons:hover {
+    background-color: #f8d655;
+    opacity: 1;
+}
+
+hr {
+    width: 90%;
+}
+
+#buttons {
+    text-align: center;
+}
+
+#contentPages > h3 {
+    text-align: center;
+    margin-bottom: 0;
+    margin-top: 10px;
+}
+
+#contentPages > p {
+    text-align: center;
+}
+
+input.custom-input {
+    font-family: 'JetBrains Mono';
+    font-size: 18px;
+    margin: 5px 0;
+}
+
+label, input {
+    display: inline-block;
+}
+
+form > label {
+    font-size: 18px;
+    width: 40%;
+    text-align: right;
+}
+
+#createEmployeeButton, #submitEmployeeButton {
+    text-align: center;
+    padding: 10px 0;
+}
+
+input {
+    all: unset;
+    border: 2px solid grey;
+    background: white;
+    color: black;
+    padding: 2px;
+    border-radius: 2px;
+}
+
+#form-container {
+    display: none;
+}
+
+#submitEmployeeButton {
+    display: none;
+}
+
+@media screen and (max-width: 576px) {
+    .mainApp {
+        width: 100%;
+        height: 100%;
+    }
+
+    input.custom-input {
+        font-family: 'JetBrains Mono';
+        font-size: 12px;
+    }
+
+    label, input {
+        display: inline-block;
+    }
+
+    form > label {
+        font-size: 14px;
+        width: 40%;
+        text-align: right;
+    }
+
+    #createEmployeeButton, #submitEmployeeButton {
+        text-align: center;
+        padding: 10px 0;
+    }
+}
+
+@media only screen and (min-width: 577px) and (max-width: 768px) {
+    .mainApp {
+        width: 100%;
+        height: 100%;
+    }
+
+    input.custom-input {
+        font-family: 'JetBrains Mono';
+        font-size: 18px;
+    }
+
+    label, input {
+        display: inline-block;
+    }
+
+    form > label {
+        font-size: 18px;
+        width: 40%;
+        text-align: right;
+    }
+
+    #createEmployeeButton, #submitEmployeeButton {
+        text-align: center;
+        padding: 20px 0;
+    }
+}
