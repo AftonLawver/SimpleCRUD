@@ -9,15 +9,30 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href='https://fonts.googleapis.com/css?family=JetBrains Mono' rel='stylesheet'/>
     <title>SimpleCRUD</title>
-    <link rel="stylesheet" href="css/style.css"/>
-    <script defer src="js/main.js"></script>
+    <link rel="stylesheet" href="public/css/style.css"/>
+    <script defer src="public/js/main.js"></script>
 </head>
 <body>
 <div class="mainApp">
     <div class="contentArea">
-        <div id="contentPages" class="contentPages" style="padding-top: 70px;">
+        <div id="contentPages" class="contentPages">
             <hr>
             <h3>Employees</h3>
+            <br>
+            <div id="employeeSection">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Occupation</th>
+                        <th>Salary</th>
+                        <th>Date Added</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
             <br>
 
             <div id="form-container">
