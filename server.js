@@ -79,6 +79,25 @@ app.delete('/delete/:id', (req, res) => {
     });
 });
 
+app.patch('/update/:id', (req, res) => {
+    const id = req.params.id;
+    const name = req.body.employeeName;
+    const occupation = req.body.occupation;
+    // const salary = req.body.salary;
+    const salary = parseInt(req.body.salary, 10); // Parse the integer
+
+    const query = 'UPDATE employees SET name = ?, occupation = ?, salary = ? WHERE employee_id=?';
+
+    connection.query(query, [name, occupation, salary, id], (err, results) => {
+        if (err) {
+            console.error('Error updating from MySQL:', err);
+            res.status(500).send('Error updating data');
+        } else {
+            console.log('Updated successfully');
+            res.status(200).send('Updated successfully');
+        }
+    });
+});
 app.listen(PORT, err => {
     if (err) {
         return console.log("ERROR", err);

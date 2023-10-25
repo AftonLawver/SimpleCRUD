@@ -53,9 +53,9 @@ deleteButtons.forEach(button => {
         })
             .then((response) => {
                 if (response.ok) {
-                    console.log('Row deleted successfully');
+                    console.log('Employee deleted successfully');
                 } else {
-                    console.error('Error deleting row');
+                    console.error('Error deleting employee');
                 }
             })
             .catch((error) => {
@@ -158,55 +158,84 @@ function validateModalSalary() {
 }
 
 const modal = document.getElementById("myModal");
+const modalNameErrorMessage = document.getElementById("modalNameErrorMessage");
+const modalSalaryErrorMessage = document.getElementById("modalSalaryErrorMessage");
+const modalOccupationErrorMessage = document.getElementById("modalOccupationErrorMessage");
+const modalNameInput = document.getElementById('modalNameInput');
+const modalOccupationInput = document.getElementById('modalOccupationInput');
+const modalSalaryInput = document.getElementById('modalSalaryInput');
 
 // Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
+const span = document.getElementsByClassName("close")[0];
 
 // Get the buttons that open the modal
 const updateButtons = document.querySelectorAll('.updateButton');
 
-updateButtons.forEach(button => {
-    button.addEventListener('click', (event) => {
-        // const row = event.target.closest('tr');
-        // const id = row.rowIndex;
-
-        // open up the modal
-        modal.style.display = "block";
-
-        // pass the rowIndex into delete method.
-        // fetch(`/update/${id}`, {
-        //     method: 'DELETE',
-        // })
-        //     .then((response) => {
-        //         if (response.ok) {
-        //             console.log('Row deleted successfully');
-        //         } else {
-        //             console.error('Error deleting row');
-        //         }
-        //     })
-        //     .catch((error) => {
-        //         console.error('Network error:', error);
-        //     });
-    })
-});
-
 // When the user clicks on <span> (x), close the modal
 span.onclick = function() {
     modal.style.display = "none";
+    modalNameErrorMessage.style.display = "none";
+    modalOccupationErrorMessage.style.display = "none";
+    modalSalaryErrorMessage.style.display = "none";
+    modalNameInput.style.border = "2px solid grey";
+    modalOccupationInput.style.border = "2px solid grey";
+    modalSalaryInput.style.border = "2px solid grey";
 }
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
     if (event.target === modal) {
         modal.style.display = "none";
+        modalNameErrorMessage.style.display = "none";
+        modalOccupationErrorMessage.style.display = "none";
+        modalSalaryErrorMessage.style.display = "none";
+        modalNameInput.style.border = "2px solid grey";
+        modalOccupationInput.style.border = "2px solid grey";
+        modalSalaryInput.style.border = "2px solid grey";
     }
 }
 
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target === modal) {
-        modal.style.display = "none";
-    }
-}
+updateButtons.forEach(button => {
+    button.addEventListener('click', (event) => {
+        const row = event.target.closest('tr');
+        const id = row.rowIndex;
+
+        // open up the modal
+        modal.style.display = "block";
+        const submitUpdateButton = document.getElementById("submitUpdateButton");
+        submitUpdateButton.addEventListener('click', (event) => {
+            if (validateModalForm()) {
+                const name = document.getElementById("modalNameInput");
+                const occupation = document.getElementById("modalOccupationInput");
+                const salary = document.getElementById("modalSalaryInput");
+                const dataToUpdate = {
+                    employeeName: name,
+                    occupation: occupation,
+                    salary: salary,
+                }
+                // pass the rowIndex into update method.
+                fetch(`/update/${id}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(dataToUpdate),
+                })
+                .then((response) => {
+                    if (response.ok) {
+                        console.log('Employee updated successfully');
+                    } else {
+                        console.error('Error deleting employee');
+                    }
+                })
+                .catch((error) => {
+                    console.error('Network error:', error);
+                });
+            }
+        })
+
+    })
+});
+
 
 
