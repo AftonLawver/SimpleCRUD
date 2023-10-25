@@ -7,19 +7,21 @@ createNewEmployeeButton.addEventListener('click', () => {
 
 const submitEmployeeButton = document.getElementById("submitEmployeeButton");
 submitEmployeeButton.addEventListener('click', () => {
-    const data = extractUserInformation();
-    const options = {
-        method: 'POST',
-        headers: {
-            'Content-Type': "application/json"
-        },
-        body: JSON.stringify(data)
-    };
-    fetch('/create', options)
-        .then((response) => response.json())
-        .then((data) => {
-            console.log(data);
-        })
+    if (validateForm()) {
+        const data = extractUserInformation();
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': "application/json"
+            },
+            body: JSON.stringify(data)
+        };
+        fetch('/create', options)
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+            })
+    }
 })
 
 const extractUserInformation = function() {
@@ -29,6 +31,9 @@ const extractUserInformation = function() {
     return {name: name, occupation: occupation, salary: salary};
 }
 
+const validateForm = function() {
+    return validateName() && validateOccupation() && validateSalary();
+}
 
 
 const deleteButtons = document.querySelectorAll('.deleteButton');
@@ -54,5 +59,53 @@ deleteButtons.forEach(button => {
             });
     })
 });
+
+function validateName() {
+    const nameInput = document.getElementById('nameInput');
+    if (!nameInput.value.match(/^(?=.{1,40}$)[a-zA-Z]+(?:[-'\s][a-zA-Z]+)*$/)) {
+        let nameErrorMessage = document.getElementById("nameErrorMessage");
+        nameErrorMessage.innerHTML = "Please enter a valid name.";
+        nameInput.style.border = "1px solid red";
+        nameErrorMessage.style.display = "block";
+        return false;
+    } else {
+        let nameErrorMessage = document.getElementById("nameErrorMessage");
+        nameInput.style.border = "1px solid green";
+        nameErrorMessage.style.display = "none";
+        return true;
+    }
+}
+
+function validateOccupation() {
+    const occupationInput = document.getElementById('occupationInput');
+    if (!occupationInput.value.match(/^(?=.{1,40}$)[a-zA-Z]+(?:[-'\s][a-zA-Z]+)*$/)) {
+        let occupationErrorMessage = document.getElementById("occupationErrorMessage");
+        occupationErrorMessage.innerHTML = "Please enter a valid occupation.";
+        occupationInput.style.border = "1px solid red";
+        occupationErrorMessage.style.display = "block";
+        return false;
+    } else {
+        let occupationErrorMessage = document.getElementById("occupationErrorMessage");
+        occupationInput.style.border = "1px solid green";
+        occupationErrorMessage.style.display = "none";
+        return true;
+    }
+}
+
+function validateSalary() {
+    const salaryInput = document.getElementById('salaryInput');
+    if (!salaryInput.value.match(/^\d{1,7}(?:\.\d{0,2})?$/)) {
+        let salaryErrorMessage = document.getElementById("salaryErrorMessage");
+        salaryErrorMessage.innerHTML = "Please enter a valid salary.";
+        salaryInput.style.border = "1px solid red";
+        salaryErrorMessage.style.display = "block";
+        return false;
+    } else {
+        let salaryErrorMessage = document.getElementById("salaryErrorMessage");
+        salaryInput.style.border = "1px solid green";
+        salaryErrorMessage.style.display = "none";
+        return true;
+    }
+}
 
 

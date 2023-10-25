@@ -4,7 +4,6 @@
     <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta http-equiv="Content-Security-Policy" content="script-src 'self' "/>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href='https://fonts.googleapis.com/css?family=JetBrains Mono' rel='stylesheet'/>
@@ -53,13 +52,16 @@
             <div id="form-container">
                 <form id="createEmployeeForm">
                     <label for="nameInput">Name</label>
-                    <input class="custom-input" id="nameInput" type="text" placeholder="John" name="name">
+                    <input class="custom-input" id="nameInput" type="text" placeholder="John" name="name" onkeyup="validateName()">
+                    <p id="nameErrorMessage"></p>
                     <br>
                     <label for="occupationInput">Occupation</label>
-                    <input class="custom-input" id="occupationInput" type="text" placeholder="Programmer" name="occupationInput">
+                    <input class="custom-input" id="occupationInput" type="text" placeholder="Programmer" name="occupationInput" onkeyup="validateOccupation()">
+                    <p id="occupationErrorMessage"></p>
                     <br>
                     <label for="salaryInput">Salary</label>
-                    <input class="custom-input" id="salaryInput" type="text" placeholder="65000" name="salaryInput">
+                    <input class="custom-input" id="salaryInput" type="text" placeholder="65000" name="salaryInput" onkeyup="validateSalary()">
+                    <p id="salaryErrorMessage"></p>
                     <br>
                 </form>
             </div>
