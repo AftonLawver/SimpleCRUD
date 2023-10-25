@@ -35,6 +35,10 @@ const validateForm = function() {
     return validateName() && validateOccupation() && validateSalary();
 }
 
+const validateModalForm = function() {
+    return validateModalName() && validateModalOccupation() && validateModalSalary();
+}
+
 
 const deleteButtons = document.querySelectorAll('.deleteButton');
 
@@ -105,6 +109,103 @@ function validateSalary() {
         salaryInput.style.border = "1px solid green";
         salaryErrorMessage.style.display = "none";
         return true;
+    }
+}
+
+function validateModalName() {
+    const modalNameInput = document.getElementById('modalNameInput');
+    const modalNameErrorMessage = document.getElementById("modalNameErrorMessage");
+    if (!modalNameInput.value.match(/^(?=.{1,40}$)[a-zA-Z]+(?:[-'\s][a-zA-Z]+)*$/)) {
+        modalNameErrorMessage.innerHTML = "Please enter a valid name.";
+        modalNameInput.style.border = "1px solid red";
+        modalNameErrorMessage.style.display = "block";
+        return false;
+    } else {
+        modalNameInput.style.border = "1px solid green";
+        modalNameErrorMessage.style.display = "none";
+        return true;
+    }
+}
+
+function validateModalOccupation() {
+    const modalOccupationInput = document.getElementById('modalOccupationInput');
+    const modalOccupationErrorMessage = document.getElementById("modalOccupationErrorMessage");
+    if (!modalOccupationInput.value.match(/^(?=.{1,40}$)[a-zA-Z]+(?:[-'\s][a-zA-Z]+)*$/)) {
+        modalOccupationErrorMessage.innerHTML = "Please enter a valid occupation.";
+        modalOccupationInput.style.border = "1px solid red";
+        modalOccupationErrorMessage.style.display = "block";
+        return false;
+    } else {
+        modalOccupationInput.style.border = "1px solid green";
+        modalOccupationErrorMessage.style.display = "none";
+        return true;
+    }
+}
+
+function validateModalSalary() {
+    const modalSalaryInput = document.getElementById('modalSalaryInput');
+    let modalSalaryErrorMessage = document.getElementById("modalSalaryErrorMessage");
+    if (!modalSalaryInput.value.match(/^\d{1,7}(?:\.\d{0,2})?$/)) {
+        modalSalaryErrorMessage.innerHTML = "Please enter a valid salary.";
+        modalSalaryInput.style.border = "1px solid red";
+        modalSalaryErrorMessage.style.display = "block";
+        return false;
+    } else {
+        modalSalaryInput.style.border = "1px solid green";
+        modalSalaryErrorMessage.style.display = "none";
+        return true;
+    }
+}
+
+const modal = document.getElementById("myModal");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// Get the buttons that open the modal
+const updateButtons = document.querySelectorAll('.updateButton');
+
+updateButtons.forEach(button => {
+    button.addEventListener('click', (event) => {
+        // const row = event.target.closest('tr');
+        // const id = row.rowIndex;
+
+        // open up the modal
+        modal.style.display = "block";
+
+        // pass the rowIndex into delete method.
+        // fetch(`/update/${id}`, {
+        //     method: 'DELETE',
+        // })
+        //     .then((response) => {
+        //         if (response.ok) {
+        //             console.log('Row deleted successfully');
+        //         } else {
+        //             console.error('Error deleting row');
+        //         }
+        //     })
+        //     .catch((error) => {
+        //         console.error('Network error:', error);
+        //     });
+    })
+});
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target === modal) {
+        modal.style.display = "none";
+    }
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target === modal) {
+        modal.style.display = "none";
     }
 }
 
