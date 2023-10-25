@@ -36,10 +36,16 @@
                                     <td><%= user.name%></td>
                                     <td><%= user.occupation%></td>
                                     <td><%= user.salary%></td>
-                                    <td><button>Delete</button><button>Update</button></td>
+                                    <td style="text-align: center">
+                                        <button style="margin-bottom: 3px" class="updateButton buttons2">Update</button>
+                                        <button class="deleteButton buttons2">Delete</button>
+                                    </td>
                                 </tr>
                             <% }) %>
-                        <% } %>
+                        <% } else { %>
+                            <p style="margin: auto; width:80%; text-align: center; font-size: 18px">There is currently no data in the database. Feel free to add an employee!</p>
+                            <br>
+                    <% } %>
                     </tbody>
                 </table>
             </div>

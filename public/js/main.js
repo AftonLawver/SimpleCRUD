@@ -29,23 +29,30 @@ const extractUserInformation = function() {
     return {name: name, occupation: occupation, salary: salary};
 }
 
-// function getEmployees() {
-//     const options = {
-//         method: 'GET',
-//         headers: {
-//             'Content-Type': "application/json"
-//         },
-//     };
-//     fetch('/employees', options)
-//         .then((response) => response.json())
-//         .then((data) => {
-//             console.log(data);
-//
-//
-//         })
-//         .catch((error) => {
-//             console.error("Error: ", error);
-//         });
-// }
+
+
+const deleteButtons = document.querySelectorAll('.deleteButton');
+
+deleteButtons.forEach(button => {
+    button.addEventListener('click', (event) => {
+        const row = event.target.closest('tr');
+        const id = row.rowIndex;
+
+        // pass the rowIndex into delete method.
+        fetch(`/delete/${id}`, {
+            method: 'DELETE',
+        })
+            .then((response) => {
+                if (response.ok) {
+                    console.log('Row deleted successfully');
+                } else {
+                    console.error('Error deleting row');
+                }
+            })
+            .catch((error) => {
+                console.error('Network error:', error);
+            });
+    })
+});
 
 

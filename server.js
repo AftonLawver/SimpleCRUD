@@ -62,7 +62,22 @@ app.post("/create", (req, res) => {
         if (err) return res.json(err);
         return res.json("Employee has been added successfully.");
     })
-})
+});
+
+app.delete('/delete/:id', (req, res) => {
+    const id = req.params.id;
+    const query = 'DELETE FROM employees WHERE employee_id = ?';
+
+    connection.query(query, [id], (err, results) => {
+        if (err) {
+            console.error('Error deleting from MySQL:', err);
+            res.status(500).send('Error deleting data');
+        } else {
+            console.log('Deleted successfully');
+            res.status(200).send('Deleted successfully');
+        }
+    });
+});
 
 app.listen(PORT, err => {
     if (err) {

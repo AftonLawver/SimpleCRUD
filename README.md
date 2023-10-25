@@ -16,9 +16,9 @@
 - Allows anyone to delete an employee from the database.
 
 ### Features in Progress
-- Delete and update of each row of data in the database.
+- Update functionality on a row of data in the database.
 - Make it so the view updates automatically when the database is altered.
-
+- Client-side validation for the employee input.
 
 ### Bugs to fix
 - Screen scroll if content is out of view.
