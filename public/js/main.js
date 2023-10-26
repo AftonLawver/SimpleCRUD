@@ -1,3 +1,6 @@
+
+const socket = io();
+
 const createNewEmployeeButton = document.getElementById("createEmployeeButton");
 createNewEmployeeButton.addEventListener('click', () => {
     document.getElementById("form-container").style.display = "block";
@@ -38,7 +41,6 @@ const validateForm = function() {
 const validateModalForm = function() {
     return validateModalName() && validateModalOccupation() && validateModalSalary();
 }
-
 
 const deleteButtons = document.querySelectorAll('.deleteButton');
 
