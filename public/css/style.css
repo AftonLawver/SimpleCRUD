@@ -260,7 +260,10 @@ input {
     width: 50%;
 }
 
-.modal-body {padding: 2px 16px;}
+.modal-body {
+    padding: 2px 16px;
+    display: flex;
+}
 
 #submitUpdateButton {
     margin: 10px 0;
@@ -272,6 +275,27 @@ input {
 
 .updateButton, .deleteButton {
     margin: 5px;
+}
+
+#currentEmployeeData {
+    font-size: 14px;
+    width: 50%;
+}
+
+#currentEmployeeData hr {
+    width: 30%;
+}
+
+#currentEmployeeData h5{
+    margin-bottom: 0;
+}
+
+#currentEmployeeData p{
+    margin: 0;
+}
+
+#modalInputArea {
+    width: 50%;
 }
 
 @media screen and (max-width: 576px) {
@@ -312,9 +336,21 @@ input {
         margin-top: 2px;
         padding: 6px 8px;
     }
+
+    .modal-body {
+        padding: 2px 16px;
+        flex-direction: column;
+    }
+
+    #currentEmployeeData {
+        width: 100%;
+    }
+
+    #modalInputArea {
+        width: 100%;
+    }
+
 }
-
-
 
 @media only screen and (min-width: 577px) and (max-width: 768px) {
     .mainApp {
@@ -334,6 +370,12 @@ input {
         font-size: 18px;
         width: 40%;
         text-align: right;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .modal-content {
+        width: 60%;
     }
 
 }

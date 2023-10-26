@@ -31,7 +31,6 @@ submitEmployeeButton.addEventListener('click', () => {
 socket.on('employee', addEmployee);
 
 function addEmployee(employee) {
-    console.log(employee);
     const tableBody = document.getElementById("tableBody");
 
     // Create new HTML elements for the row and cells
@@ -45,7 +44,7 @@ function addEmployee(employee) {
     const deleteButton = document.createElement('button');
 
     // Set the text content and button attributes
-    idCell.textContent = employee.employee_id; // why is this undefined??
+    idCell.textContent = employee.employee_id;
     nameCell.textContent = employee.name;
     occupationCell.textContent = employee.occupation;
     salaryCell.textContent = employee.salary;
@@ -54,6 +53,78 @@ function addEmployee(employee) {
     updateButton.classList.add('updateButton', 'buttons2');
     deleteButton.textContent = 'Delete';
     deleteButton.classList.add('deleteButton', 'buttons2');
+
+    deleteButton.addEventListener('click', (event) => {
+        const row = event.target.closest('tr');
+        const id = row.firstChild.textContent;
+
+        // pass the rowIndex into delete method.
+        fetch(`/delete/${id}`, {
+            method: 'DELETE',
+        })
+            .then((response) => {
+                if (response.ok) {
+                    console.log('Employee deleted successfully');
+                    row.remove();
+                } else {
+                    console.error('Error deleting employee');
+                }
+            })
+            .catch((error) => {
+                console.error('Network error:', error);
+            });
+    })
+
+    updateButton.addEventListener('click', (event) => {
+        const row = event.target.closest('tr');
+        const id = row.firstChild.textContent;
+
+        // open up the modal
+        modal.style.display = "block";
+
+        //fill in the current employees data that the user is trying to modify
+        const currentName = document.getElementById("currentName");
+        const currentOccupation = document.getElementById("currentOccupation");
+        const currentSalary = document.getElementById("currentSalary");
+
+        currentName.textContent = row.children[1].textContent;
+        currentOccupation.textContent = row.children[2].textContent;
+        currentSalary.textContent = row.children[3].textContent;
+
+        const submitUpdateButton = document.getElementById("submitUpdateButton");
+        submitUpdateButton.addEventListener('click', (event) => {
+            if (validateModalForm()) {
+                const name = document.getElementById("modalNameInput").value;
+                const occupation = document.getElementById("modalOccupationInput").value;
+                const salary = document.getElementById("modalSalaryInput").value;
+                const dataToUpdate = {
+                    employeeName: name,
+                    occupation: occupation,
+                    salary: salary,
+                }
+                fetch(`/update/${id}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(dataToUpdate),
+                })
+                    .then((response) => {
+                        if (response.ok) {
+                            row.children[1].textContent = name;
+                            row.children[2].textContent = occupation;
+                            row.children[3].textContent = salary;
+                            console.log('Employee updated successfully');
+                        } else {
+                            console.error('Error updating employee');
+                        }
+                    })
+                    .catch((error) => {
+                        console.error('Network error:', error);
+                    });
+            }
+        })
+    })
 
     // Append the cells to the row and the buttons to the action cell
     newRow.appendChild(idCell);
@@ -103,28 +174,6 @@ const validateModalForm = function() {
 }
 
 const deleteButtons = document.querySelectorAll('.deleteButton');
-
-deleteButtons.forEach(button => {
-    button.addEventListener('click', (event) => {
-        const row = event.target.closest('tr');
-        const id = row.firstChild.nextSibling.textContent;
-
-        // pass the rowIndex into delete method.
-        fetch(`/delete/${id}`, {
-            method: 'DELETE',
-        })
-            .then((response) => {
-                if (response.ok) {
-                    console.log('Employee deleted successfully');
-                } else {
-                    console.error('Error deleting employee');
-                }
-            })
-            .catch((error) => {
-                console.error('Network error:', error);
-            });
-    })
-});
 
 function validateName() {
     const nameInput = document.getElementById('nameInput');
@@ -230,9 +279,6 @@ const modalSalaryInput = document.getElementById('modalSalaryInput');
 // Get the <span> element that closes the modal
 const span = document.getElementsByClassName("close")[0];
 
-// Get the buttons that open the modal
-const updateButtons = document.querySelectorAll('.updateButton');
-
 // When the user clicks on <span> (x), close the modal
 span.onclick = function() {
     modal.style.display = "none";
@@ -256,45 +302,3 @@ window.onclick = function(event) {
         modalSalaryInput.style.border = "2px solid grey";
     }
 }
-
-updateButtons.forEach(button => {
-    button.addEventListener('click', (event) => {
-        const row = event.target.closest('tr');
-        const id = row.rowIndex;
-
-        // open up the modal
-        modal.style.display = "block";
-        const submitUpdateButton = document.getElementById("submitUpdateButton");
-        submitUpdateButton.addEventListener('click', (event) => {
-            if (validateModalForm()) {
-                const name = document.getElementById("modalNameInput").value;
-                const occupation = document.getElementById("modalOccupationInput").value;
-                const salary = document.getElementById("modalSalaryInput").value;
-                const dataToUpdate = {
-                    employeeName: name,
-                    occupation: occupation,
-                    salary: salary,
-                }
-                // pass the rowIndex into update method.
-                fetch(`/update/${id}`, {
-                    method: 'PATCH',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(dataToUpdate),
-                })
-                .then((response) => {
-                    if (response.ok) {
-                        console.log('Employee updated successfully');
-                    } else {
-                        console.error('Error deleting employee');
-                    }
-                })
-                .catch((error) => {
-                    console.error('Network error:', error);
-                });
-            }
-        })
-
-    })
-});

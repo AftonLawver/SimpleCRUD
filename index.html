@@ -46,19 +46,34 @@
                         <h3 style="text-align: center">Update Employee</h3>
                     </div>
                     <div class="modal-body" style="text-align: center">
-                        <label for="modalNameInput">Name</label>
-                        <input class="custom-input" id="modalNameInput" type="text" placeholder="John" name="name" onkeyup="validateModalName()">
-                        <p id="modalNameErrorMessage"></p>
-                        <br>
-                        <label for="modalOccupationInput">Occupation</label>
-                        <input class="custom-input" id="modalOccupationInput" type="text" placeholder="Programmer" name="occupationInput" onkeyup="validateModalOccupation()">
-                        <p id="modalOccupationErrorMessage"></p>
-                        <br>
-                        <label for="modalSalaryInput">Salary</label>
-                        <input class="custom-input" id="modalSalaryInput" type="text" placeholder="65000" name="salaryInput" onkeyup="validateModalSalary()">
-                        <p id="modalSalaryErrorMessage"></p>
-                        <br>
-                        <button class="buttons" id="submitUpdateButton">Submit</button>
+                        <div id="currentEmployeeData">
+                            <h5>Current employee</h5>
+                            <hr>
+                            <p>Current name: <span id="currentName"></span></p>
+                            <br>
+
+                            <p>Current occupation: <span id="currentOccupation"></span></p>
+                            <br>
+
+                            <p>Current salary: <span id="currentSalary"></span></p>
+                            <br>
+                        </div>
+                        <div id="modalInputArea">
+                            <label for="modalNameInput">Name</label>
+                            <input class="custom-input" id="modalNameInput" type="text" placeholder="John" name="name" onkeyup="validateModalName()">
+                            <p id="modalNameErrorMessage"></p>
+                            <br>
+                            <label for="modalOccupationInput">Occupation</label>
+                            <input class="custom-input" id="modalOccupationInput" type="text" placeholder="Programmer" name="occupationInput" onkeyup="validateModalOccupation()">
+                            <p id="modalOccupationErrorMessage"></p>
+                            <br>
+                            <label for="modalSalaryInput">Salary</label>
+                            <input class="custom-input" id="modalSalaryInput" type="text" placeholder="65000" name="salaryInput" onkeyup="validateModalSalary()">
+                            <p id="modalSalaryErrorMessage"></p>
+                            <br>
+                            <button class="buttons" id="submitUpdateButton">Submit</button>
+                        </div>
+
                     </div>
                 </div>
 
