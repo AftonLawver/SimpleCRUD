@@ -1,18 +1,22 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const path = require("path");
-require('dotenv').config();
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
 const PORT = process.env.PORT;
 const bodyParser = require('body-parser');
+const mysql = require('mysql2');
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.json());
+app.use(express.static(path.join(__dirname, 'public')));
 app.set("view engine", "ejs");
 
-const mysql = require('mysql2');
-app.use(express.static(path.join(__dirname, 'public')));
-
-// app.set('views', path.join(__dirname, 'views'));
+io.on('connection', (socket) => {
+    console.log("a user connected.");
+});
 
 const connection = mysql.createConnection({
     host: process.env.MYSQL_HOST,
@@ -22,13 +26,15 @@ const connection = mysql.createConnection({
 });
 
 app.get('/', function(req, res) {
+    res.sendFile(path.join(__dirname, '/index.html'));
+});
+
+app.get('/employees', function(req, res) {
     connection.connect();
     const q = "SELECT * from employees"
     connection.query(q, function(err, data, fields) {
         if (!err) {
-            const users = data;
-            res.render("index.ejs", { users });
-            // return res.json(data);
+            res.send(data);
         } else {
             console.log('Error while performing Query.');
         }
@@ -37,14 +43,26 @@ app.get('/', function(req, res) {
 
 app.post("/create", (req, res) => {
     const q = "INSERT INTO employees (`name`,`occupation`,`salary`) VALUES (?)"
+    const selectQuery = "SELECT * FROM employees WHERE employee_id = LAST_INSERT_ID()"; // Assuming 'id' is the auto-incremented primary key
+
     const values = [
         req.body.name,
         req.body.occupation,
         req.body.salary
     ];
     connection.query(q, [values], (err, data) => {
-        if (err) return res.json(err);
-        return res.json("Employee has been added successfully.");
+        if (err)
+            return res.json(err);
+        else {
+            connection.query(selectQuery, (err, data) => {
+                if (err) {
+                    return res.status(500).json(err);
+                }
+                const insertedEmployee = data[0];
+                io.emit('employee', insertedEmployee);
+                return res.status(200).json("Employee has been added successfully.");
+            });
+        }
     })
 });
 
@@ -82,10 +100,10 @@ app.patch('/update/:id', (req, res) => {
         }
     });
 });
-app.listen(PORT, err => {
-    if (err) {
-        return console.log("ERROR", err);
-    }
-    console.log(`Server started on port ${PORT}`);
+
+const server = http.listen(PORT, () => {
+    console.log("Server is listening on port", server.address().port)
 });
+
+
 

@@ -262,14 +262,16 @@ input {
 
 .modal-body {padding: 2px 16px;}
 
-/*.modal-footer {*/
-/*    padding: 2px 16px;*/
-/*    background-color: #5cb85c;*/
-/*    color: white;*/
-/*}*/
-
 #submitUpdateButton {
     margin: 10px 0;
+}
+
+.centeredCell {
+    text-align: center;
+}
+
+.updateButton, .deleteButton {
+    margin: 5px;
 }
 
 @media screen and (max-width: 576px) {

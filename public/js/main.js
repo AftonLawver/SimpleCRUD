@@ -1,5 +1,5 @@
-
 const socket = io();
+getEmployees();
 
 const createNewEmployeeButton = document.getElementById("createEmployeeButton");
 createNewEmployeeButton.addEventListener('click', () => {
@@ -7,6 +7,7 @@ createNewEmployeeButton.addEventListener('click', () => {
     createNewEmployeeButton.style.display = "none";
     document.getElementById("submitEmployeeButton").style.display = "inline";
 })
+
 
 const submitEmployeeButton = document.getElementById("submitEmployeeButton");
 submitEmployeeButton.addEventListener('click', () => {
@@ -26,6 +27,65 @@ submitEmployeeButton.addEventListener('click', () => {
             })
     }
 })
+
+socket.on('employee', addEmployee);
+
+function addEmployee(employee) {
+    console.log(employee);
+    const tableBody = document.getElementById("tableBody");
+
+    // Create new HTML elements for the row and cells
+    const newRow = document.createElement('tr');
+    const idCell = document.createElement('td');
+    const nameCell = document.createElement('td');
+    const occupationCell = document.createElement('td');
+    const salaryCell = document.createElement('td');
+    const actionCell = document.createElement('td');
+    const updateButton = document.createElement('button');
+    const deleteButton = document.createElement('button');
+
+    // Set the text content and button attributes
+    idCell.textContent = employee.employee_id; // why is this undefined??
+    nameCell.textContent = employee.name;
+    occupationCell.textContent = employee.occupation;
+    salaryCell.textContent = employee.salary;
+    actionCell.classList.add("centeredCell");
+    updateButton.textContent = 'Update';
+    updateButton.classList.add('updateButton', 'buttons2');
+    deleteButton.textContent = 'Delete';
+    deleteButton.classList.add('deleteButton', 'buttons2');
+
+    // Append the cells to the row and the buttons to the action cell
+    newRow.appendChild(idCell);
+    newRow.appendChild(nameCell);
+    newRow.appendChild(occupationCell);
+    newRow.appendChild(salaryCell);
+    actionCell.appendChild(updateButton);
+    actionCell.appendChild(deleteButton);
+    newRow.appendChild(actionCell);
+
+    // Append the new row to the table body
+    tableBody.appendChild(newRow);
+}
+
+function getEmployees() {
+    fetch ("/employees")
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            // Parse the response body as JSON
+            return response.json();
+        })
+        .then(data => {
+            // Handle the JSON data
+            // console.log(`do something with the data: ${data}`);
+            data.forEach(addEmployee);
+        })
+        .catch(error => {
+            console.error('Fetch error:', error);
+        });
+}
 
 const extractUserInformation = function() {
     let name = document.getElementById('nameInput').value;
@@ -238,6 +298,3 @@ updateButtons.forEach(button => {
 
     })
 });
-
-
-
