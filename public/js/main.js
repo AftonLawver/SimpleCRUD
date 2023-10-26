@@ -45,7 +45,7 @@ const deleteButtons = document.querySelectorAll('.deleteButton');
 deleteButtons.forEach(button => {
     button.addEventListener('click', (event) => {
         const row = event.target.closest('tr');
-        const id = row.rowIndex;
+        const id = row.firstChild.nextSibling.textContent;
 
         // pass the rowIndex into delete method.
         fetch(`/delete/${id}`, {
@@ -205,9 +205,9 @@ updateButtons.forEach(button => {
         const submitUpdateButton = document.getElementById("submitUpdateButton");
         submitUpdateButton.addEventListener('click', (event) => {
             if (validateModalForm()) {
-                const name = document.getElementById("modalNameInput");
-                const occupation = document.getElementById("modalOccupationInput");
-                const salary = document.getElementById("modalSalaryInput");
+                const name = document.getElementById("modalNameInput").value;
+                const occupation = document.getElementById("modalOccupationInput").value;
+                const salary = document.getElementById("modalSalaryInput").value;
                 const dataToUpdate = {
                     employeeName: name,
                     occupation: occupation,

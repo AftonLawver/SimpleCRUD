@@ -35,22 +35,6 @@ app.get('/', function(req, res) {
     });
 });
 
-
-
-// creating route for the app to get all employees
-app.get('/employees', (req, res) => {
-    connection.connect();
-    const q = "SELECT * from employees"
-    connection.query(q, function(err, data, fields) {
-        if (!err) {
-            return res.json(data);
-        } else {
-            console.log('Error while performing Query.');
-        }
-    });
-    connection.end();
-});
-
 app.post("/create", (req, res) => {
     const q = "INSERT INTO employees (`name`,`occupation`,`salary`) VALUES (?)"
     const values = [

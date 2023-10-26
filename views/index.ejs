@@ -22,6 +22,7 @@
                 <table>
                     <thead>
                     <tr>
+                        <th>Employee ID</th>
                         <th>Name</th>
                         <th>Occupation</th>
                         <th>Salary</th>
@@ -32,6 +33,7 @@
                         <% if (users.length > 0) { %>
                             <% users.forEach(user => { %>
                                 <tr>
+                                    <td><%= user.employee_id%></td>
                                     <td><%= user.name%></td>
                                     <td><%= user.occupation%></td>
                                     <td><%= user.salary%></td>

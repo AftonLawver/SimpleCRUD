@@ -15,9 +15,9 @@
 - Allows anyone to delete an employee from the database.
 
 ### Features in Progress
-- Update functionality on a row of data in the database.
 - Make it so the view updates automatically when the database is altered.
-- Take video of application to put in readme.
+- Take video (GIF) of application to put in readme.
+- Get the database hosted on web somewhere for free.
 
 ### Bugs to fix
 - None at the moment.
