@@ -74,7 +74,6 @@ app.delete('/delete/:id', (req, res) => {
             console.error('Error deleting from MySQL:', err);
             res.status(500).send('Error deleting data');
         } else {
-            console.log('Deleted successfully');
             res.status(200).send('Deleted successfully');
         }
     });
@@ -94,7 +93,6 @@ app.patch('/update/:id', (req, res) => {
             console.error('Error updating from MySQL:', err);
             res.status(500).send('Error updating data');
         } else {
-            console.log('Updated successfully');
             res.status(200).send('Updated successfully');
         }
     });

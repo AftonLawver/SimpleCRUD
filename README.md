@@ -15,9 +15,10 @@
 - Allows anyone to delete an employee from the database.
 
 ### Features in Progress
-- Make it so the view updates automatically when the database is altered.
 - Take video (GIF) of application to put in readme.
 - Get the database hosted on web somewhere for free.
+- Make modal close when update submit button is clicked and update is complete.
+- Make messages show to the user that employee has been updated, deleted, created.
 
 ### Bugs to fix
 - None at the moment.

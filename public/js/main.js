@@ -3,6 +3,10 @@ getEmployees();
 
 const createNewEmployeeButton = document.getElementById("createEmployeeButton");
 createNewEmployeeButton.addEventListener('click', () => {
+    document.getElementById("nameInput").value = "";
+    document.getElementById("occupationInput").value = "";
+    document.getElementById("salaryInput").value = "";
+    document.getElementById("createEmployeeForm").style.display = "block";
     document.getElementById("form-container").style.display = "block";
     createNewEmployeeButton.style.display = "none";
     document.getElementById("submitEmployeeButton").style.display = "inline";
@@ -23,7 +27,14 @@ submitEmployeeButton.addEventListener('click', () => {
         fetch('/create', options)
             .then((response) => response.json())
             .then((data) => {
-                console.log(data);
+                document.getElementById("createEmployeeForm").style.display = "none";
+                document.getElementById("submitEmployeeButton").style.display = "none";
+                document.getElementById("createEmployeeButton").style.display = "inline";
+                document.getElementById("message").style.display = "block";
+                document.getElementById("message").innerText = "Employee created!";
+                setTimeout(() => {
+                    document.getElementById("message").style.display = "none";
+                }, 4000);
             })
     }
 })
@@ -55,6 +66,10 @@ function addEmployee(employee) {
     deleteButton.classList.add('deleteButton', 'buttons2');
 
     deleteButton.addEventListener('click', (event) => {
+        document.getElementById("createEmployeeForm").style.display = "none";
+        document.getElementById("form-container").style.display = "none";
+        createNewEmployeeButton.style.display = "inline";
+        document.getElementById("submitEmployeeButton").style.display = "none";
         const row = event.target.closest('tr');
         const id = row.firstChild.textContent;
 
@@ -64,8 +79,13 @@ function addEmployee(employee) {
         })
             .then((response) => {
                 if (response.ok) {
-                    console.log('Employee deleted successfully');
                     row.remove();
+                    document.getElementById("createEmployeeForm").style.display = "none";
+                    document.getElementById("message").style.display = "block";
+                    document.getElementById("message").innerText = "Employee deleted!";
+                    setTimeout(() => {
+                        document.getElementById("message").style.display = "none";
+                    }, 4000);
                 } else {
                     console.error('Error deleting employee');
                 }
@@ -76,6 +96,10 @@ function addEmployee(employee) {
     })
 
     updateButton.addEventListener('click', (event) => {
+        document.getElementById("createEmployeeForm").style.display = "none";
+        document.getElementById("form-container").style.display = "none";
+        createNewEmployeeButton.style.display = "inline";
+        document.getElementById("submitEmployeeButton").style.display = "none";
         const row = event.target.closest('tr');
         const id = row.firstChild.textContent;
 
@@ -114,7 +138,13 @@ function addEmployee(employee) {
                             row.children[1].textContent = name;
                             row.children[2].textContent = occupation;
                             row.children[3].textContent = salary;
-                            console.log('Employee updated successfully');
+                            modal.style.display = "none";
+                            document.getElementById("createEmployeeForm").style.display = "none";
+                            document.getElementById("message").style.display = "block";
+                            document.getElementById("message").innerText = "Employee updated!";
+                            setTimeout(() => {
+                                document.getElementById("message").style.display = "none";
+                            }, 4000);
                         } else {
                             console.error('Error updating employee');
                         }
@@ -172,8 +202,6 @@ const validateForm = function() {
 const validateModalForm = function() {
     return validateModalName() && validateModalOccupation() && validateModalSalary();
 }
-
-const deleteButtons = document.querySelectorAll('.deleteButton');
 
 function validateName() {
     const nameInput = document.getElementById('nameInput');

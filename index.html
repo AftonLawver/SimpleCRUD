@@ -17,7 +17,12 @@
     <div class="contentArea">
         <div id="contentPages" class="contentPages">
             <hr>
-            <h3>Employees</h3>
+            <div id="titleBar" class="flex-container">
+                <img  src="/images/employees.png" alt="">
+                <h3>StaffVault</h3>
+                <img src="/images/employees1.png" alt="">
+            </div>
+
             <br>
             <div id="employeeSection">
                 <table>
@@ -37,9 +42,7 @@
                 </table>
             </div>
 
-            <!-- The Modal -->
             <div id="myModal" class="modal">
-                <!-- Modal content -->
                 <div class="modal-content">
                     <div class="modal-header">
                         <span class="close">&times;</span>
@@ -73,10 +76,8 @@
                             <br>
                             <button class="buttons" id="submitUpdateButton">Submit</button>
                         </div>
-
                     </div>
                 </div>
-
             </div>
 
             <br>
@@ -103,7 +104,9 @@
             <div class="middle">
                 <button id="createEmployeeButton" class="buttons">Create new employee</button>
             </div>
-            <br>
+            <div class="middle">
+                <p id="message"></p>
+            </div>
             <hr>
         </div>
     </div>
