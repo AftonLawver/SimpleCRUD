@@ -7,6 +7,7 @@ const io = require('socket.io')(http);
 const PORT = process.env.PORT;
 const bodyParser = require('body-parser');
 const mysql = require('mysql2');
+const fs = require('fs');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -21,7 +22,9 @@ const connection = mysql.createConnection({
     host: process.env.MYSQL_HOST,
     user: process.env.MYSQL_USER,
     password: process.env.MYSQL_PASSWORD,
-    database: process.env.MYSQL_DATABASE
+    database: process.env.MYSQL_DATABASE,
+    port: process.env.DATABASE_PORT,
+    ssl:{ca:fs.readFileSync("DigiCertGlobalRootCA.crt.pem")}
 });
 
 app.get('/', function(req, res) {
