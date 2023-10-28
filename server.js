@@ -24,7 +24,7 @@ const connection = mysql.createConnection({
     password: process.env.MYSQL_PASSWORD,
     database: process.env.MYSQL_DATABASE,
     port: process.env.DATABASE_PORT,
-    ssl:{ca:fs.readFileSync(process.env.CERT)}
+    ssl:{ca:process.env.CERT}
 });
 
 app.get('/', function(req, res) {
