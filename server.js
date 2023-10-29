@@ -24,7 +24,8 @@ const connection = mysql.createConnection({
     password: process.env.MYSQL_PASSWORD,
     database: process.env.MYSQL_DATABASE,
     port: process.env.DATABASE_PORT,
-    ssl:{ca:process.env.CERT}
+    ssl:{ca:process.env.CERT},
+    connectTimeout: 20000,
 });
 
 app.get('/', function(req, res) {
@@ -35,10 +36,10 @@ app.get('/', function(req, res) {
 app.get('/employees', function(req, res) {
     connection.connect((err) => {
         if (err) {
-            console.error('error connecting to database: ', err);
+            console.error('Error connecting to the MySQL database: ', err);
         }
         else {
-            console.log("connected to database.")
+            console.log("Connected to the MySQL database.")
         }
     });
     const q = "SELECT * from employees"
