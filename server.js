@@ -32,9 +32,12 @@ app.get('/', function(req, res) {
 });
 
 app.get('/employees', function(req, res) {
+    console.log("in get method for employees.");
     connection.connect();
+    console.log("in get method for employees. Connected to DB!");
     const q = "SELECT * from employees"
     connection.query(q, function(err, data, fields) {
+        console.log("in get method for employees. Connected to DB, and running query!");
         if (!err) {
             res.send(data);
         } else {
