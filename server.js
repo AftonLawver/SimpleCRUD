@@ -19,17 +19,13 @@ io.on('connection', (socket) => {
 });
 
 const connection = mysql.createConnection({
-    host: process.env.HOST,
-    user: process.env.USER,
-    password: process.env.PASSWORD,
-    database: process.env.DATABASE
-    // host: process.env.MYSQL_HOST,
-    // user: process.env.MYSQL_USER,
-    // password: process.env.MYSQL_PASSWORD,
-    // database: process.env.MYSQL_DATABASE,
-    // port: process.env.DATABASE_PORT,
-    // ssl:{ca:process.env.CERT},
-    // connectTimeout: 20000,
+    host: process.env.MYSQL_HOST,
+    user: process.env.MYSQL_USER,
+    password: process.env.MYSQL_PASSWORD,
+    database: process.env.MYSQL_DATABASE,
+    port: process.env.DATABASE_PORT,
+    ssl:{ca:process.env.CERT},
+    connectTimeout: 20000,
 });
 
 app.get('/', function(req, res) {
