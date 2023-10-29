@@ -465,5 +465,37 @@ input {
         font-size: 24px;
         text-align: right;
     }
+}
 
+@media screen and (max-width: 320px) {
+    .modal-content {
+        width: 60%;
+    }
+
+    #employeeSection td {
+        font-size: 10px;
+    }
+
+    #employeeSection th {
+        font-size: 10px;
+        margin:0 2px;
+    }
+
+    .buttons, .buttons2 {
+        font-size: 10px;
+    }
+
+    input.custom-input {
+        font-family: 'JetBrains Mono';
+        font-size: 10px;
+    }
+
+    label, input {
+        display: inline-block;
+    }
+
+    form > label {
+        font-size: 10px;
+        text-align: right;
+    }
 }
