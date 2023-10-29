@@ -469,7 +469,7 @@ input {
 
 @media screen and (max-width: 320px) {
     .modal-content {
-        width: 60%;
+        width: 80%;
     }
 
     #employeeSection td {
@@ -487,7 +487,7 @@ input {
 
     input.custom-input {
         font-family: 'JetBrains Mono';
-        font-size: 10px;
+        font-size: 12px;
     }
 
     label, input {
@@ -495,7 +495,33 @@ input {
     }
 
     form > label {
-        font-size: 10px;
+        font-size: 12px;
         text-align: right;
+    }
+
+    #nameErrorMessage, #occupationErrorMessage, #salaryErrorMessage,
+    #modalNameErrorMessage, #modalOccupationErrorMessage, #modalSalaryErrorMessage {
+        font-size: 12px;
+    }
+
+    .modal-header {
+        padding: 2px 10px;
+        background-color: #5c7ea0;
+        color: white;
+    }
+
+    .modal-header>h3{
+        font-size: 14px;
+    }
+
+    #myModal label {
+        font-size: 12px;
+        width: 35%;
+        text-align: right;
+    }
+
+    .modal {
+        padding-top: 80px; /* Location of the box */
+
     }
 }
