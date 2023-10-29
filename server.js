@@ -28,16 +28,21 @@ const connection = mysql.createConnection({
 });
 
 app.get('/', function(req, res) {
+    console.log("sending file index.html.");
     res.sendFile(path.join(__dirname, '/index.html'));
 });
 
 app.get('/employees', function(req, res) {
-    console.log("in get method for employees.");
-    connection.connect();
-    console.log("in get method for employees. Connected to DB!");
+    connection.connect((err) => {
+        if (err) {
+            console.error('error connecting to database: ', err);
+        }
+        else {
+            console.log("connected to database.")
+        }
+    });
     const q = "SELECT * from employees"
     connection.query(q, function(err, data, fields) {
-        console.log("in get method for employees. Connected to DB, and running query!");
         if (!err) {
             res.send(data);
         } else {
